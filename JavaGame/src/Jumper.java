@@ -7,34 +7,32 @@ import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.nio.file.StandardOpenOption;
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.Iterator;
 import java.util.Random;
-
 import javax.imageio.ImageIO;
 import javax.swing.*;
-import java.awt.List;
+
 
 public class Jumper implements ActionListener, KeyListener {
-    public final int WIDTH = 1200, HEIGHT = 600;
-    public final int ENEMY_SIZE = 50 , ENEMY2_SIZE = 70 , POINT_SIZE = 30 ;
-    public Renderer renderer;
-    public ArrayList<Rectangle> columns;
-    public ArrayList<Bullet> bullets;
-    public int ticks, yMotion, score;
-    public boolean gameOver, started;
-    public Random rand;
-    public Image groundImage, playerImage , evilImage , devilImage , collectibleImage;
-    public Enemy enemy;
-    public Enemy2 enemy2;
-    public Player player;
-    public Collectible collectible;
+    private final int WIDTH = 1200, HEIGHT = 600;
+    private final int ENEMY_SIZE = 50 , ENEMY2_SIZE = 70 , POINT_SIZE = 30 ;
+    private Renderer renderer;
+    private ArrayList<Rectangle> columns;
+    private ArrayList<Bullet> bullets;
+    private int ticks, yMotion, score;
+    private boolean gameOver, started;
+    private Random rand;
+    private Image groundImage, playerImage , evilImage , devilImage , collectibleImage;
+    private Enemy enemy;
+    private Enemy2 enemy2;
+    private Player player;
+    private Collectible collectible;
     private ArrayList<Image> backgrounds;
     private ArrayList<Integer> backgroundXCoordinates;
     private long lastShotTime;
-    public ArrayList<EnemyBullet> enemyBullets;
-    public ArrayList<Collectible> collecter;
-    public int enemyBulletSpeed = 8;
+    private ArrayList<EnemyBullet> enemyBullets;
+    private ArrayList<Collectible> collecter;
+    private int enemyBulletSpeed = 8;
     private long startTime;
     private long gameTimeInSeconds;
 
@@ -224,33 +222,33 @@ public class Jumper implements ActionListener, KeyListener {
                 gameOver = true;
             }
 
-            // Respawn enemy with random height
+            // odzycie enemy
             if (enemy.getX() + enemy.getWidth() < 0) {
                 int randHeight = rand.nextInt(0,250); // Adjust the range based on your preferences
                 enemy.setLocation(WIDTH, randHeight);
             }
-            // Respawn enemy with random height
+            // dzycie enemy2
             if (enemy2.getX() + enemy2.getWidth() < 0) {
                 int randHeight2 = rand.nextInt(0,250); // Adjust the range based on your preferences
                 enemy2.setLocation(WIDTH, randHeight2);
             }
 
 
-            // Update bullets position
+            // Update pozycja kuli
             Iterator<Bullet> iterator = bullets.iterator();
             while (iterator.hasNext()) {
                 Bullet bullet = iterator.next();
                 bullet.move();
 
-                // Remove bullets that go out of bounds
+
                 if (bullet.x > WIDTH) {
                     iterator.remove();
                 }
 
-                // Check for collision between bullet and enemy
+                // sprawdzenie kolizji  kuli  z wrogiem
                 if (bullet.intersects(enemy)) {
                     iterator.remove();
-                    // Handle bullet-enemy collision action (e.g., increase score)
+                   
                     System.out.println("Hit!");
                     enemy.setLocation(WIDTH, rand.nextInt(HEIGHT - 100));
 
