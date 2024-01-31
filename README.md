@@ -1,9 +1,59 @@
 # Zawansowane-Programowanie-Obiektowe
 Projekt przeznaczony na Zaawansowane Programowanie obiektowe 
 
-# Projekt Gry
+# Java Game
 
-To repozytorium zawiera kod źródłowy prostego projektu gry w języku Java. Korzystano z wersji Javy 17.02 
+To repozytorium zawiera kod źródłowy projektu gry w języku Java. Korzystano z wersji Javy 17.02 
+
+
+## Używane Biblioteki
+
+### 1. `java.awt.*` (Abstract Window Toolkit)
+   - Klasy i interfejsy do tworzenia interfejsów użytkownika oraz obsługi grafiki.
+
+### 2. `java.awt.event.*`
+   - Obsługa zdarzeń (eventów) w AWT, umożliwia interakcję użytkownika.
+
+### 3. `javax.swing.*`
+   - Zaawansowane komponenty interfejsu graficznego użytkownika (GUI).
+
+### 4. `java.io.File`
+   - Manipulacja plikami, odczyt, zapis, sprawdzanie istnienia itp.
+
+### 5. `java.io.IOException`
+   - Wyjątek dla problemów z operacjami wejścia/wyjścia.
+
+### 6. `java.nio.charset.StandardCharsets`
+   - Standardowe kodowania znaków używane w operacjach wejścia/wyjścia.
+
+### 7. `java.nio.file.Files` i `java.nio.file.Paths`
+   - Operacje na plikach i katalogach w sposób zaawansowany.
+
+### 8. `java.nio.file.StandardOpenOption`
+   - Opcje otwarcia pliku w operacjach wejścia/wyjścia.
+
+### 9. `java.util.ArrayList`
+   - Implementacja dynamicznej tablicy dla elastycznego zarządzania elementami.
+
+### 10. `java.util.Iterator`
+    - Interfejs do iteracji po elementach kolekcji.
+
+### 11. `java.util.Random`
+    - Generowanie pseudolosowych liczb.
+
+### 12. `javax.imageio.ImageIO`
+    - Operacje związane z obsługą obrazów, takie jak odczyt i zapis.
+
+### 13. `java.awt.event.ActionEvent` i `java.awt.event.ActionListener`
+    - Obsługa zdarzeń związanych z akcjami użytkownika.
+
+### 14. `java.io.*`
+    - Klasy związane z operacjami wejścia/wyjścia, takie jak strumienie danych.
+
+### 15. `java.awt.Graphics` i `javax.swing.JPanel`
+    - Rysowanie na komponentach graficznych, np. na panelu w aplikacji Swing.
+
+
 
 ## Klasy:
 
