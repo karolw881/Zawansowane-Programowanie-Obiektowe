@@ -57,7 +57,7 @@ To repozytorium zawiera kod źródłowy projektu gry w języku Java. Korzystano 
 
 # Jumper - Gra Platformowa w Javie
 
-Jumper to prosta gra platformowa napisana w języku Java przy użyciu bibliotek AWT i Swing. Celem gracza jest unikanie przeszkód, zbieranie punktów oraz unikanie strzałów przeciwników.
+Jumper to  gra platformowa napisana w języku Java przy użyciu bibliotek AWT i Swing. Celem gracza jest unikanie przeszkód, zbieranie punktów oraz unikanie strzałów przeciwników.
 
 ## Zasady Gry
 
@@ -71,13 +71,15 @@ Jumper to prosta gra platformowa napisana w języku Java przy użyciu bibliotek 
   - Zbieraj punkty poprzez zebranie punktów (Collectible).
   - Strzelaj wrogom, aby zdobywać dodatkowe punkty.
   - Gra kończy się, gdy postać gracza zderzy się z przeszkodą lub przeciwnikiem.
-
+  - Wytzymaj jak najdłóżej bez zderzenia się z przeszkodą lub przeciwnikiem i zdobywaj jak najwięcej punktów zestrzelając przeciwnika i zbierajac punkty . 
 - **Punktacja:**
   - Zebranie punktu: +10 punktów
   - Zestrzelenie wroga: +10 punktów
 
 - **Restart Gry:**
   - Gra może zostać zrestartowana po zakończeniu poprzez naciśnięcie przycisku "Play Again".
+ 
+
 
 ## Wymagania
 
