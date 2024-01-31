@@ -134,17 +134,8 @@ Aby zobaczyć wyniki, kliknij przycisk "Wysokie Wyniki" na stronie startowej. Wy
 ## Struktura plików:
 
 - `src/`: Zawiera kod źródłowy gry.
-- `highscores.txt`: Plik przechowujący wysokie wyniki.
-
-
-## Uruchamianie Gry:
-
-Skompiluj i uruchom klasę `Jumper`, aby rozpocząć grę.
-
-bash
-
-javac Jumper.java
-java Jumper
+- `highscores.txt`: Plik przechowujący  wyniki.
+- `nazwaplikuwyjsciowego.txt`: zawiera posortowane wyniki gracza.
 
 ## Obiektowość w Klasie Jumper
 
