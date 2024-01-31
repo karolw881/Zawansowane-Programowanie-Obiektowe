@@ -25,6 +25,11 @@ Celem gracza jest unikanie przeszkód, zbieranie punktów oraz unikanie strzał�
 
 - **Restart Gry:**
   - Gra może zostać zrestartowana po zakończeniu poprzez naciśnięcie przycisku "Play Again".
+  ## Użycie:
+
+Aby uruchomić grę, wykonaj klasę `Jumper`. Gra wyświetli stronę startową z opcjami rozpoczęcia gry, zobaczenia  wyników lub wyjścia.
+
+Aby zobaczyć wyniki, kliknij przycisk "Wyniki" na stronie startowej. Wyniki są odczytywane z pliku, sortowane i wyświetlane w oknie dialogowym.
  
 ## Wymagania
 
@@ -124,12 +129,6 @@ Klasa `Jumper` jest główną klasą w projekcie gry. Odpowiada za logikę gry, 
 
 Klasa zawiera konstruktor, który inicjalizuje różne elementy gry, takie jak postać gracza, wrogowie, kolumny, czy obrazy. Dodatkowo, klasa implementuje ActionListener i KeyListener do obsługi zdarzeń czasowych i klawiatury.
 
-
-## Użycie:
-
-Aby uruchomić grę, wykonaj klasę `Jumper`. Gra wyświetli stronę startową z opcjami rozpoczęcia gry, zobaczenia wysokich wyników lub wyjścia.
-
-Aby zobaczyć wyniki, kliknij przycisk "Wysokie Wyniki" na stronie startowej. Wyniki są odczytywane z pliku, sortowane i wyświetlane w oknie dialogowym.
 
 ## Struktura plików:
 
