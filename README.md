@@ -1,63 +1,10 @@
 # Zawansowane-Programowanie-Obiektowe
 Projekt przeznaczony na Zaawansowane Programowanie obiektowe 
 
-# Java Game
+#  Jumper - Gra Platformowa w Javie
 
-To repozytorium zawiera kod źródłowy projektu gry w języku Java. Korzystano z wersji Javy 17.02 
-
-
-## Używane Biblioteki
-
-### 1. `java.awt.*` (Abstract Window Toolkit)
-   - Klasy i interfejsy do tworzenia interfejsów użytkownika oraz obsługi grafiki.
-
-### 2. `java.awt.event.*`
-   - Obsługa zdarzeń (eventów) w AWT, umożliwia interakcję użytkownika.
-
-### 3. `javax.swing.*`
-   - Zaawansowane komponenty interfejsu graficznego użytkownika (GUI).
-
-### 4. `java.io.File`
-   - Manipulacja plikami, odczyt, zapis, sprawdzanie istnienia itp.
-
-### 5. `java.io.IOException`
-   - Wyjątek dla problemów z operacjami wejścia/wyjścia.
-
-### 6. `java.nio.charset.StandardCharsets`
-   - Standardowe kodowania znaków używane w operacjach wejścia/wyjścia.
-
-### 7. `java.nio.file.Files` i `java.nio.file.Paths`
-   - Operacje na plikach i katalogach w sposób zaawansowany.
-
-### 8. `java.nio.file.StandardOpenOption`
-   - Opcje otwarcia pliku w operacjach wejścia/wyjścia.
-
-### 9. `java.util.ArrayList`
-   - Implementacja dynamicznej tablicy dla elastycznego zarządzania elementami.
-
-### 10. `java.util.Iterator`
-    - Interfejs do iteracji po elementach kolekcji.
-
-### 11. `java.util.Random`
-    - Generowanie pseudolosowych liczb.
-
-### 12. `javax.imageio.ImageIO`
-    - Operacje związane z obsługą obrazów, takie jak odczyt i zapis.
-
-### 13. `java.awt.event.ActionEvent` i `java.awt.event.ActionListener`
-    - Obsługa zdarzeń związanych z akcjami użytkownika.
-
-### 14. `java.io.*`
-    - Klasy związane z operacjami wejścia/wyjścia, takie jak strumienie danych.
-
-### 15. `java.awt.Graphics` i `javax.swing.JPanel`
-    - Rysowanie na komponentach graficznych, np. na panelu w aplikacji Swing.
-
-
-
-# Jumper - Gra Platformowa w Javie
-
-Jumper to  gra platformowa napisana w języku Java przy użyciu bibliotek AWT i Swing. Celem gracza jest unikanie przeszkód, zbieranie punktów oraz unikanie strzałów przeciwników.
+To repozytorium zawiera kod źródłowy projektu gry w języku Java przy użyciu bibliotek AWT i Swing. Korzystano z wersji Javy 17.02. Napisano w środowiski Intelij. 
+Celem gracza jest unikanie przeszkód, zbieranie punktów oraz unikanie strzałów przeciwników.
 
 ## Zasady Gry
 
@@ -79,8 +26,6 @@ Jumper to  gra platformowa napisana w języku Java przy użyciu bibliotek AWT i 
 - **Restart Gry:**
   - Gra może zostać zrestartowana po zakończeniu poprzez naciśnięcie przycisku "Play Again".
  
-
-
 ## Wymagania
 
 - JRE (Java Runtime Environment) do uruchomienia gry.
@@ -258,4 +203,49 @@ Klasa Jumper została zaprojektowana zgodnie z paradygmatem obiektowości w prog
 
 Te elementy obiektowości sprawiają, że klasa Jumper jest czytelna, modularna i łatwa do utrzymania. Pozwala to na efektywne zarządzanie logiką gry oraz reużywalność kodu.
 
+## Używane Biblioteki
 
+### 1. `java.awt.*` (Abstract Window Toolkit)
+   - Klasy i interfejsy do tworzenia interfejsów użytkownika oraz obsługi grafiki.
+
+### 2. `java.awt.event.*`
+   - Obsługa zdarzeń (eventów) w AWT, umożliwia interakcję użytkownika.
+
+### 3. `javax.swing.*`
+   - Zaawansowane komponenty interfejsu graficznego użytkownika (GUI).
+
+### 4. `java.io.File`
+   - Manipulacja plikami, odczyt, zapis, sprawdzanie istnienia itp.
+
+### 5. `java.io.IOException`
+   - Wyjątek dla problemów z operacjami wejścia/wyjścia.
+
+### 6. `java.nio.charset.StandardCharsets`
+   - Standardowe kodowania znaków używane w operacjach wejścia/wyjścia.
+
+### 7. `java.nio.file.Files` i `java.nio.file.Paths`
+   - Operacje na plikach i katalogach w sposób zaawansowany.
+
+### 8. `java.nio.file.StandardOpenOption`
+   - Opcje otwarcia pliku w operacjach wejścia/wyjścia.
+
+### 9. `java.util.ArrayList`
+   - Implementacja dynamicznej tablicy dla elastycznego zarządzania elementami.
+
+### 10. `java.util.Iterator`
+    - Interfejs do iteracji po elementach kolekcji.
+
+### 11. `java.util.Random`
+    - Generowanie pseudolosowych liczb.
+
+### 12. `javax.imageio.ImageIO`
+    - Operacje związane z obsługą obrazów, takie jak odczyt i zapis.
+
+### 13. `java.awt.event.ActionEvent` i `java.awt.event.ActionListener`
+    - Obsługa zdarzeń związanych z akcjami użytkownika.
+
+### 14. `java.io.*`
+    - Klasy związane z operacjami wejścia/wyjścia, takie jak strumienie danych.
+
+### 15. `java.awt.Graphics` i `javax.swing.JPanel`
+    - Rysowanie na komponentach graficznych, np. na panelu w aplikacji Swing.
