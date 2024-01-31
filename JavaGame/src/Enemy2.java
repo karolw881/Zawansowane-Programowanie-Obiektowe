@@ -1,12 +1,12 @@
 import java.awt.*;
 import java.util.Random;
 
-class Enemy extends Rectangle {
+class Enemy2 extends Rectangle {
     private int speed;
 
-    public Enemy(int x, int y, int width, int height) {
+    public Enemy2(int x, int y, int width, int height) {
         super(x, y, width, height);
-        speed = 10;
+        speed = 30;
     }
 
     public void move() {
@@ -18,7 +18,8 @@ class Enemy extends Rectangle {
 
     public void respawn() {
         x = 1200;
-        y = new Random().nextInt(500);
+        y = new Random().nextInt(501);
     }
+
 
 }

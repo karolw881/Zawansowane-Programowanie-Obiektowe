@@ -2,50 +2,57 @@ import java.awt.*;
 import java.awt.event.*;
 import java.io.File;
 import java.io.IOException;
+import java.nio.charset.StandardCharsets;
+import java.nio.file.Files;
+import java.nio.file.Paths;
+import java.nio.file.StandardOpenOption;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Iterator;
 import java.util.Random;
 
 import javax.imageio.ImageIO;
-import javax.swing.JFrame;
-import javax.swing.Timer;
+import javax.swing.*;
+import java.awt.List;
 
 public class Jumper implements ActionListener, KeyListener {
-
-    public static Jumper jumper;
-
     public final int WIDTH = 1200, HEIGHT = 600;
-
-    public final int ENEMY_SIZE = 50;
+    public final int ENEMY_SIZE = 50 , ENEMY2_SIZE = 70 , POINT_SIZE = 30 ;
     public Renderer renderer;
-
     public ArrayList<Rectangle> columns;
     public ArrayList<Bullet> bullets;
-    public Rectangle player;
-
-    // public ArrayList<Rectangle> columns;
-
     public int ticks, yMotion, score;
-
     public boolean gameOver, started;
-
     public Random rand;
-
-    public Image groundImage, skyImage, playerImage;
-
+    public Image groundImage, playerImage , evilImage , devilImage , collectibleImage;
     public Enemy enemy;
+    public Enemy2 enemy2;
+    public Player player;
+    public Collectible collectible;
+    private ArrayList<Image> backgrounds;
+    private ArrayList<Integer> backgroundXCoordinates;
+    private long lastShotTime;
+    public ArrayList<EnemyBullet> enemyBullets;
+    public ArrayList<Collectible> collecter;
+    public int enemyBulletSpeed = 8;
+    private long startTime;
+    private long gameTimeInSeconds;
+
 
     Jumper() {
         JFrame jframe = new JFrame();
         Timer timer = new Timer(40, this);
-
+        lastShotTime = System.currentTimeMillis();
         bullets = new ArrayList<>();
         renderer = new Renderer(this);
         rand = new Random();
         try {
-            groundImage = ImageIO.read(new File("ziemia.jpg")); // Replace with the actual file path
-            skyImage = ImageIO.read(new File("niebo.jpg")); // Replace with the actual file path
-            playerImage = ImageIO.read(new File("Magik.png")); // Replace with the actual file path
+            groundImage = ImageIO.read(new File("ziemia.jpg"));
+            playerImage = ImageIO.read(new File("playerx.jpg"));
+            evilImage = ImageIO.read(new File("evil.jpg"));
+            devilImage = ImageIO.read(new File("devil.jpg"));
+            collectibleImage = ImageIO.read(new File("dragon.jpg"));
+
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -53,12 +60,16 @@ public class Jumper implements ActionListener, KeyListener {
         jframe.setTitle("Jumper");
         jframe.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         jframe.setSize(WIDTH, HEIGHT);
-      //  jframe.setResizable(false);
+        jframe.setResizable(false);
         jframe.setVisible(true);
         jframe.addKeyListener(this);
-        player = new Rectangle(10, HEIGHT, 100, 100);
+        player = new Player(10, HEIGHT , 60, 60);
         enemy = new Enemy(WIDTH, 300, ENEMY_SIZE, ENEMY_SIZE);
+        enemy2 = new Enemy2(WIDTH, 120, ENEMY2_SIZE, ENEMY2_SIZE);
+        collectible = new Collectible(WIDTH - 40 , 80, POINT_SIZE , POINT_SIZE );
         columns = new ArrayList<Rectangle>();
+        enemyBullets = new ArrayList<>();
+        collecter  = new ArrayList<>();
         addColumn(true);
         addColumn(true);
         addColumn(true);
@@ -67,31 +78,48 @@ public class Jumper implements ActionListener, KeyListener {
         addColumn(true);
         addColumn(true);
         addColumn(true);
+        addColumn(true);
+        addColumn(true);
+        addColumn(true);
+        addColumn(true);
+        addColumn(true);
+        addColumn(true);
+        addColumn(true);
+        addColumn(true);
+        startTime = System.currentTimeMillis();
+        initializeBackgrounds();
         timer.start();
+
     }
 
     public void repaint(Graphics g) {
-        // Draw the sky image
-        g.drawImage(skyImage, 0, 0, WIDTH, 2 * HEIGHT / 3, null);
-
-        // Draw the ground image
         g.drawImage(groundImage, 0, 2 * HEIGHT / 3, WIDTH, HEIGHT, null);
-
-        // Draw the player using the loaded image
-        g.drawImage(playerImage, player.x, player.y , player.width, player.height, null);
-
-        // Draw the enemy
-        g.setColor(Color.blue);
-        g.fillRect(enemy.x, enemy.y, enemy.width, enemy.height);
+        for (int i = 0; i < backgrounds.size(); i++) {
+            g.drawImage(backgrounds.get(i), backgroundXCoordinates.get(i), 0, WIDTH, 2 * HEIGHT / 3, null);
+        }
 
 
-        // Draw bullets
+        g.drawImage(playerImage, player.x, player.y  , player.width, player.height, null);
+        g.drawImage(evilImage, enemy.x, enemy.y, enemy.width, enemy.height, null);
+        g.drawImage(devilImage, enemy2.x, enemy2.y, enemy2.width, enemy2.height, null);
+        g.setColor(Color.white);
+        g.drawString("Time: " + gameTimeInSeconds + "s", 10, 20);
+        g.setColor(Color.white);
+        g.drawString("Score: " + score, 10, 40);
+        System.out.println(gameTimeInSeconds);
+
         for (Bullet bullet : bullets) {
             g.setColor(Color.red);
             g.fillRect(bullet.x, bullet.y, bullet.width, bullet.height);
         }
 
 
+        g.drawImage(collectibleImage,collectible.x, collectible.y, collectible.width, collectible.height, null);
+
+        for (EnemyBullet enemyBullet : enemyBullets) {
+            g.setColor(Color.blue);
+            g.fillRect(enemyBullet.x, enemyBullet.y, enemyBullet.width, enemyBullet.height);
+        }
 
         for (Rectangle column : columns)
         {
@@ -99,116 +127,199 @@ public class Jumper implements ActionListener, KeyListener {
         }
         if (gameOver)
         {
-            g.drawString("Game Over!", 100, HEIGHT / 2 - 50);
+
         }
     }
 
-    public static void main(String[] args) {
-
-        LaunchPage page = new LaunchPage();
-
-
-       // jumper = new Jumper();
-    }
-
+    public static void main(String[] args) {new LaunchPage();}
 
     public void paintColumn(Graphics g, Rectangle column)
     {
-        g.setColor(Color.green.darker());
+
         g.fillRect(column.x, column.y , column.width, column.height);
+        g.drawImage(groundImage, column.x, column.y , column.width, column.height , null);
     }
     @Override
     public void actionPerformed(ActionEvent e) {
         ticks++;
         started = true;
-        gameOver = false;
-        int speed = 10;
+        gameTimeInSeconds = (System.currentTimeMillis() - startTime) / 1000;
 
-        if (started && !gameOver) {
-            // Apply gravity to yMotion
-            yMotion += 1;
+        if (gameOver) {
+            // Wyświetlenie komunikatu o końcu gry
+            int choice = JOptionPane.showConfirmDialog(
+                    null,
+                    "Game Over!\nScore: " + score + "\nGame Time: " + gameTimeInSeconds + " seconds\nDo you want to play again?",
+                    "Game Over",
+                    JOptionPane.YES_NO_OPTION
+            );
 
-            // Update player position
-            player.y += yMotion;
-
-            // Check if the player hits the ground
-            if (player.y + player.height > HEIGHT) {
-                player.y = HEIGHT - player.height;
-                yMotion = 0; // Stop falling
+            if (choice == JOptionPane.YES_OPTION) {
+                // Resetowanie gry
+                startTime = System.currentTimeMillis();
+                score = 0;
+                resetGame();
+            } else {
+                // Zakończenie programu po naciśnięciu "No"
+                System.exit(0);
             }
+        } else {
+            int speed = 10;
 
-            // Check if the player reaches the initial position after jumping
-            if (player.y >= HEIGHT / 2 - 10) {
-                player.y = HEIGHT / 2 - 10; // Set it to the initial position
-                yMotion = 0; // Stop falling
-            }
-
-            // Check for collision with columns
-            for (int i = 0; i < columns.size(); i++) {
-                Rectangle column = columns.get(i);
-
-                if (player.intersects(column)) {
-                    // Player intersects with a column, set player's y position on the column
-                    player.y = column.y - player.height;
-                    yMotion = 0; // Stop falling
+            if (started && !gameOver) {
+                yMotion = 10;
+                player.y += yMotion;
+                if (player.y + player.height > HEIGHT) {
+                    player.y = HEIGHT - player.height - 100;
+                    yMotion = 0;
                 }
 
-                column.x -= speed;
+                if (player.y < -100) gameOver = true;
+
+
+
+
+
+                // Przesuń resztę elementów gry w lewo, gdy postać zbliży się do prawej krawędzi
+                if (player.x + player.width > WIDTH / 2) {
+                    player.x = WIDTH / 2 - player.width;
+                    for (Rectangle column : columns) {
+                        column.x -= speed;
+                    }
+                    enemy.x -= speed;
+                }
+
+                if (player.intersects(collectible)) {
+                   score+=10;
+                   collectible.respawn();
+                }
+
+
+                for (int i = 0; i < columns.size(); i++) {
+                    Rectangle column = columns.get(i);
+
+                    if (player.intersects(column)) {
+                        player.y = column.y - player.height;
+                        yMotion = 0; // przestan opadac
+                    }
+
+                    column.x -= speed;
+                }
             }
-        }
 
-        // Update enemy position
-        enemy.move();
 
-        // Check for collision between player and enemy
-        if (player.intersects(enemy)) {
-            gameOver = true;
-            // Handle collision action (e.g., game over logic)
-            System.out.println("Lose");
-        }
+            enemy.move();
+            enemy2.move();
+            collectible.move();
 
-        // Respawn enemy with random height
-        if (enemy.getX() + enemy.getWidth() < 0) {
-            int randHeight = rand.nextInt(HEIGHT - 100); // Adjust the range based on your preferences
-            enemy.setLocation(WIDTH, randHeight);
-        }
 
-        // Update bullets position
-        Iterator<Bullet> iterator = bullets.iterator();
-        while (iterator.hasNext()) {
-            Bullet bullet = iterator.next();
-            bullet.move();
-
-            // Remove bullets that go out of bounds
-            if (bullet.x > WIDTH) {
-                iterator.remove();
+            if (player.intersects(enemy)) {
+                System.out.println("Lose");
+                resetGame();
+                gameOver = true;
+            }
+            if (player.intersects(enemy2)) {
+                System.out.println("Lose");
+                resetGame();
+                gameOver = true;
             }
 
-            // Check for collision between bullet and enemy
-            if (bullet.intersects(enemy)) {
-                iterator.remove();
-                // Handle bullet-enemy collision action (e.g., increase score)
-                System.out.println("Hit!");
-                enemy.setLocation(WIDTH, rand.nextInt(HEIGHT - 100)); // Respawn enemy at a random height
+            // Respawn enemy with random height
+            if (enemy.getX() + enemy.getWidth() < 0) {
+                int randHeight = rand.nextInt(0,250); // Adjust the range based on your preferences
+                enemy.setLocation(WIDTH, randHeight);
             }
-        }
+            // Respawn enemy with random height
+            if (enemy2.getX() + enemy2.getWidth() < 0) {
+                int randHeight2 = rand.nextInt(0,250); // Adjust the range based on your preferences
+                enemy2.setLocation(WIDTH, randHeight2);
+            }
 
-        renderer.repaint();
+
+            // Update bullets position
+            Iterator<Bullet> iterator = bullets.iterator();
+            while (iterator.hasNext()) {
+                Bullet bullet = iterator.next();
+                bullet.move();
+
+                // Remove bullets that go out of bounds
+                if (bullet.x > WIDTH) {
+                    iterator.remove();
+                }
+
+                // Check for collision between bullet and enemy
+                if (bullet.intersects(enemy)) {
+                    iterator.remove();
+                    // Handle bullet-enemy collision action (e.g., increase score)
+                    System.out.println("Hit!");
+                    enemy.setLocation(WIDTH, rand.nextInt(HEIGHT - 100));
+
+                    score += 10; // Adjust points as needed
+                    System.out.println("Hit! Score: " + score);
+                }
+
+
+                if (bullet.intersects(enemy2)) {
+                    iterator.remove();
+                    System.out.println("Hit!");
+                    enemy2.setLocation(WIDTH, rand.nextInt(HEIGHT - 100));
+                    score += 10; // Adjust points as needed
+                    System.out.println("Hit! Score: " + score);
+                }
+            }
+
+            // Przesuń obrazy tła w lewo
+            for (int i = 0; i < backgroundXCoordinates.size(); i++) {
+                backgroundXCoordinates.set(i, backgroundXCoordinates.get(i) - 4);
+            }
+
+
+        // Sprawdź, czy przedostatni obraz tła jest całkowicie poza ekranem
+            int secondToLastBackgroundIndex = backgroundXCoordinates.size() - 2;
+            if (backgroundXCoordinates.get(secondToLastBackgroundIndex) + WIDTH <= 0) {
+                // Ponownie załaduj listę z pierwotnymi obrazami
+                initializeBackgrounds();
+            }
+
+
+            // Sprawdź czy wrogowie powinni strzelać
+            if (ticks % 80 == 0) {
+                enemyShoot(enemy);
+
+
+            }
+            // Update wrogich strzałów
+            Iterator<EnemyBullet> enemyBulletIterator = enemyBullets.iterator();
+            while (enemyBulletIterator.hasNext()) {
+                EnemyBullet enemyBullet = enemyBulletIterator.next();
+                enemyBullet.move();
+
+                // Sprawdź kolizję między strzałem wroga a graczem
+                if (enemyBullet.intersects(player)) {
+                    gameOver = true;
+                    System.out.println("You got shot!");
+                }
+
+                // Usuń strzały wrogów, które opuściły ekran
+                if (enemyBullet.x < 0) {
+                    enemyBulletIterator.remove();
+                }
+            }
+
+            renderer.repaint();
+        }
     }
 
 
     public void jump()
     {
-        player.y -=250;
+        player.y -=100;
 
     }
 
 
     public void addColumn(boolean start) {
-        int space = 300;
-        int minWidth = 30;  // Minimalna szerokość kolumny
         int maxWidth = 150; // Maksymalna szerokość kolumny
-        int width = rand.nextInt(maxWidth - minWidth + 1) + minWidth; // Losuj szerokość kolumny w zakresie [minWidth, maxWidth]
         int randDistance = rand.nextInt(400 , 2000); // Losowa odległość między kolumnami
 
         if (start) {
@@ -217,9 +328,17 @@ public class Jumper implements ActionListener, KeyListener {
     }
 
     public void shoot() {
-        // Create a new bullet and add it to the bullets list
-        Bullet bullet = new Bullet(player.x + player.width, player.y + player.height / 2, 10, 5);
-        bullets.add(bullet);
+        long currentTime = System.currentTimeMillis();
+
+
+        if (currentTime - lastShotTime >= 1000) {
+
+            Bullet bullet = new Bullet(player.x + player.width, player.y + player.height / 2, 10, 5);
+            bullets.add(bullet);
+
+
+            lastShotTime = currentTime;
+        }
     }
 
     @Override
@@ -245,6 +364,79 @@ public class Jumper implements ActionListener, KeyListener {
     {
 
     }
+
+
+    private void resetGame() {
+        player = new Player(10, HEIGHT - 60, 60, 60); // Używamy teraz klasy Player
+        enemy.setLocation(WIDTH, 300);
+        columns.clear();
+        bullets.clear();
+        addColumn(true);
+        addColumn(true);
+        addColumn(true);
+        addColumn(true);
+        addColumn(true);
+        addColumn(true);
+        addColumn(true);
+        addColumn(true);
+        addColumn(true);
+        addColumn(true);
+        addColumn(true);
+        addColumn(true);
+        addColumn(true);
+        addColumn(true);
+        addColumn(true);
+        gameOver = false;
+        started = true;
+
+        try {
+
+            String data = "Score: " + score  + " Time: " + gameTimeInSeconds + "s" + System.lineSeparator();
+            Files.write(Paths.get("highscores.txt"), data.getBytes(StandardCharsets.UTF_8),
+                    StandardOpenOption.CREATE, StandardOpenOption.APPEND);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+
+
+        enemy.respawn();
+        enemy2.respawn();
+        collectible.respawn();
+    }
+
+
+
+    private void initializeBackgrounds() {
+        backgrounds = new ArrayList<>();
+        backgroundXCoordinates = new ArrayList<>();
+
+        try {
+            backgrounds.add(ImageIO.read(new File("niebo.jpg")));
+            backgrounds.add(ImageIO.read(new File("background3.png")));
+            backgrounds.add(ImageIO.read(new File("background4.jpg")));
+            backgrounds.add(ImageIO.read(new File("background5.jpg")));
+            backgrounds.add(ImageIO.read(new File("background6.jpg")));
+            backgrounds.add(ImageIO.read(new File("background10.jpg")));
+
+            for (int i = 0; i < backgrounds.size(); i++) {
+                backgroundXCoordinates.add(i * WIDTH);
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void enemyShoot(Enemy enemy) {
+        int bulletX = enemy.x;
+        int bulletY = enemy.y + enemy.height / 2 - 2; // Umieść strzał na środku wroga
+        int bulletWidth = 10;
+        int bulletHeight = 5;
+        EnemyBullet enemyBullet = new EnemyBullet(bulletX, bulletY, bulletWidth, bulletHeight, enemyBulletSpeed);
+        enemyBullets.add(enemyBullet);
+    }
+
+
 }
 
 

@@ -9,7 +9,6 @@ class Bullet extends Rectangle {
     }
 
     public void move() {
-        // Move the bullet to the right
         x += 5;
     }
 }
