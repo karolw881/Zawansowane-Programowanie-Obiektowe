@@ -47,7 +47,8 @@ Celem gracza jest unikanie przeszkód, zbieranie punktów oraz unikanie strzał�
 
    bash
   gh repo clone karolw881/Zawansowane-Programowanie-Obiektowe
-Otwórz Projekt w IntelliJ IDEA:
+
+- Otwórz Projekt w IntelliJ IDEA:
 
 Uruchom IntelliJ IDEA.
 Wybierz opcję "Open" i wybierz katalog, w którym znajduje się projekt Jumper.
@@ -57,38 +58,7 @@ Znajdź klasę Jumper.java w drzewie projektu.
 Kliknij prawym przyciskiem myszy na klasie Jumper.java.
 Wybierz opcję "Run 'Jumper
 
-   
-# Jumper - Gra Platformowa w Javie
 
-Jumper to prosta gra platformowa napisana w języku Java przy użyciu bibliotek AWT i Swing. Celem gracza jest unikanie przeszkód, zbieranie punktów oraz unikanie strzałów przeciwników.
-
-## Zasady Gry
-
-- **Sterowanie:**
-  - Skok: `Spacja` lub `Strzałka w górę`
-  - Strzał: `Z`
-  - Ruch w prawo: `Strzałka w prawo`
-
-- **Cel gry:**
-  - Unikaj przeszkód i przeciwników.
-  - Zbieraj punkty poprzez zebranie punktów (Collectible).
-  - Strzelaj wrogom, aby zdobywać dodatkowe punkty.
-  - Gra kończy się, gdy postać gracza zderzy się z przeszkodą lub przeciwnikiem.
-
-- **Punktacja:**
-  - Zebranie punktu: +10 punktów
-  - Zestrzelenie wroga: +10 punktów
-
-- **Restart Gry:**
-  - Gra może zostać zrestartowana po zakończeniu poprzez naciśnięcie przycisku "Play Again".
-
-## Wymagania
-
-- JRE (Java Runtime Environment) do uruchomienia gry.
-
-
-
-   
 ## Klasy:
 
 ### Bullet
