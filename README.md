@@ -93,7 +93,61 @@ Jumper to  gra platformowa napisana w języku Java przy użyciu bibliotek AWT i 
    java Jumper
 
 
+## Uruchomienie z GitHuba w IntelliJ IDEA
 
+2. **Pobierz Projekt:**
+   Sklonuj lub pobierz repozytorium gry z GitHuba na swój lokalny komputer.
+
+   ```bash
+   git clone https://github.com/Zawansowane-Programowanie-Obiektowe/Jumper.git
+
+   
+# Jumper - Gra Platformowa w Javie
+
+Jumper to prosta gra platformowa napisana w języku Java przy użyciu bibliotek AWT i Swing. Celem gracza jest unikanie przeszkód, zbieranie punktów oraz unikanie strzałów przeciwników.
+
+## Zasady Gry
+
+- **Sterowanie:**
+  - Skok: `Spacja` lub `Strzałka w górę`
+  - Strzał: `Z`
+  - Ruch w prawo: `Strzałka w prawo`
+
+- **Cel gry:**
+  - Unikaj przeszkód i przeciwników.
+  - Zbieraj punkty poprzez zebranie punktów (Collectible).
+  - Strzelaj wrogom, aby zdobywać dodatkowe punkty.
+  - Gra kończy się, gdy postać gracza zderzy się z przeszkodą lub przeciwnikiem.
+
+- **Punktacja:**
+  - Zebranie punktu: +10 punktów
+  - Zestrzelenie wroga: +10 punktów
+
+- **Restart Gry:**
+  - Gra może zostać zrestartowana po zakończeniu poprzez naciśnięcie przycisku "Play Again".
+
+## Wymagania
+
+- JRE (Java Runtime Environment) do uruchomienia gry.
+
+## Uruchomienie z GitHuba w IntelliJ IDEA
+
+1. **Pobierz Projekt:**
+   Sklonuj lub pobierz repozytorium gry z GitHuba na swój lokalny komputer.
+
+   ```bash
+   git clone https://github.com/TWOJA_NAZWA_REPOZYTORIUM/Jumper.git
+Otwórz Projekt w IntelliJ IDEA:
+
+Uruchom IntelliJ IDEA.
+Wybierz opcję "Open" i wybierz katalog, w którym znajduje się projekt Jumper.
+Uruchomienie Klasy Jumper:
+
+Znajdź klasę Jumper.java w drzewie projektu.
+Kliknij prawym przyciskiem myszy na klasie Jumper.java.
+Wybierz opcję "Run 'Jumper'".
+
+   
 ## Klasy:
 
 ### Bullet
@@ -181,4 +235,30 @@ Skompiluj i uruchom klasę `Jumper`, aby rozpocząć grę.
 ```bash
 javac Jumper.java
 java Jumper
+
+# Obiektowość w Klasie Jumper
+
+Klasa Jumper została zaprojektowana zgodnie z paradygmatem obiektowości w programowaniu. Oto opis elementów obiektowych w tej klasie:
+
+1. **Koncepcja Obiektu**
+   - *Obiekty Klasy:* Obiekt tej klasy reprezentuje główną logikę gry. Jest odpowiedzialny za zarządzanie elementami jak gracz, przeciwnicy, strzały, przeszkody, punkty, obrazy tła, itp.
+
+2. **Encapsulation (Enkapsulacja)**
+   - *Pola Prywatne:* Wszystkie pola klasy są zdeklarowane jako prywatne, co oznacza, że są niedostępne z zewnątrz klasy. Dostęp do nich jest możliwy tylko za pomocą publicznych metod.
+
+3. **Inheritance (Dziedziczenie)**
+   - *Implementacja Interfejsów:* Klasa Jumper implementuje interfejsy ActionListener i KeyListener, co pozwala na obsługę zdarzeń związanych z akcjami użytkownika.
+
+4. **Polymorphism (Polimorfizm)**
+   - *Nadpisywanie Metod:* Kluczowe metody takie jak paintColumn, actionPerformed, jump, shoot, itp., są nadpisywane, co umożliwia dostosowywanie ich do specyfiki gry.
+
+5. ** a takze inne pomocne koncepcje **
+
+   - *Używanie Klas Zewnętrznych:* Klasa Jumper korzysta z wielu innych klas, takich jak Renderer, Player, Enemy, Bullet, Collectible, itp., do zorganizowanego zarządzania różnymi elementami gry.
+   - *Listy Obiektów:* Klasa zawiera listy obiektów, takie jak bullets, columns, enemyBullets, które agregują elementy o podobnej funkcji.
+   - *Konstruktor Klasy:* Klasa posiada konstruktor Jumper(), który inicjalizuje wiele elementów gry, takich jak obrazy, obiekty przeciwników, gracz, tło, itp.
+
+
+Te elementy obiektowości sprawiają, że klasa Jumper jest czytelna, modularna i łatwa do utrzymania. Pozwala to na efektywne zarządzanie logiką gry oraz reużywalność kodu.
+
 
