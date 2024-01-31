@@ -46,7 +46,7 @@ Celem gracza jest unikanie przeszkód, zbieranie punktów oraz unikanie strzał�
    Sklonuj lub pobierz repozytorium gry z GitHuba na swój lokalny komputer.
 
    bash
-   git clone https://github.com/TWOJA_NAZWA_REPOZYTORIUM/Jumper.git
+  gh repo clone karolw881/Zawansowane-Programowanie-Obiektowe
 Otwórz Projekt w IntelliJ IDEA:
 
 Uruchom IntelliJ IDEA.
