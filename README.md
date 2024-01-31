@@ -38,8 +38,6 @@ Celem gracza jest unikanie przeszkód, zbieranie punktów oraz unikanie strzał�
    java Jumper
 
 
-## Uruchomienie z GitHuba w IntelliJ IDEA
-
 2. ## Uruchomienie z GitHuba w IntelliJ IDEA
 
  **Pobierz Projekt:**
