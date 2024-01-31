@@ -3,7 +3,7 @@ Projekt przeznaczony na Zaawansowane Programowanie obiektowe
 
 # Projekt Gry
 
-To repozytorium zawiera kod źródłowy prostego projektu gry w języku Java. Gra obejmuje różne klasy, takie jak Bullet, Collectible, Enemy, Enemy2, EnemyBullet, Jumper, LaunchPage, Player, Renderer i Result.
+To repozytorium zawiera kod źródłowy prostego projektu gry w języku Java. Korzystano z wersji Javy 17.02 
 
 ## Klasy:
 
