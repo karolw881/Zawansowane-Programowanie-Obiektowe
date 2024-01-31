@@ -95,11 +95,22 @@ Jumper to  gra platformowa napisana w języku Java przy użyciu bibliotek AWT i 
 
 ## Uruchomienie z GitHuba w IntelliJ IDEA
 
-2. **Pobierz Projekt:**
+2. ## Uruchomienie z GitHuba w IntelliJ IDEA
+
+ **Pobierz Projekt:**
    Sklonuj lub pobierz repozytorium gry z GitHuba na swój lokalny komputer.
 
-   ```bash
-   git clone https://github.com/Zawansowane-Programowanie-Obiektowe/Jumper.git
+   bash
+   git clone https://github.com/TWOJA_NAZWA_REPOZYTORIUM/Jumper.git
+Otwórz Projekt w IntelliJ IDEA:
+
+Uruchom IntelliJ IDEA.
+Wybierz opcję "Open" i wybierz katalog, w którym znajduje się projekt Jumper.
+Uruchomienie Klasy Jumper:
+
+Znajdź klasę Jumper.java w drzewie projektu.
+Kliknij prawym przyciskiem myszy na klasie Jumper.java.
+Wybierz opcję "Run 'Jumper
 
    
 # Jumper - Gra Platformowa w Javie
@@ -130,22 +141,7 @@ Jumper to prosta gra platformowa napisana w języku Java przy użyciu bibliotek 
 
 - JRE (Java Runtime Environment) do uruchomienia gry.
 
-## Uruchomienie z GitHuba w IntelliJ IDEA
 
-1. **Pobierz Projekt:**
-   Sklonuj lub pobierz repozytorium gry z GitHuba na swój lokalny komputer.
-
-   ```bash
-   git clone https://github.com/TWOJA_NAZWA_REPOZYTORIUM/Jumper.git
-Otwórz Projekt w IntelliJ IDEA:
-
-Uruchom IntelliJ IDEA.
-Wybierz opcję "Open" i wybierz katalog, w którym znajduje się projekt Jumper.
-Uruchomienie Klasy Jumper:
-
-Znajdź klasę Jumper.java w drzewie projektu.
-Kliknij prawym przyciskiem myszy na klasie Jumper.java.
-Wybierz opcję "Run 'Jumper'".
 
    
 ## Klasy:
