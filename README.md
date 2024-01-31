@@ -232,11 +232,12 @@ Aby zobaczyć wyniki, kliknij przycisk "Wysokie Wyniki" na stronie startowej. Wy
 
 Skompiluj i uruchom klasę `Jumper`, aby rozpocząć grę.
 
-```bash
+bash
+
 javac Jumper.java
 java Jumper
 
-# Obiektowość w Klasie Jumper
+## Obiektowość w Klasie Jumper
 
 Klasa Jumper została zaprojektowana zgodnie z paradygmatem obiektowości w programowaniu. Oto opis elementów obiektowych w tej klasie:
 
