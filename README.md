@@ -1,4 +1,4 @@
-# Zawansowane-Programowanie-Obiektowe
+# Java Game
 Projekt przeznaczony na Zaawansowane Programowanie obiektowe 
 
 #  Jumper - Gra Platformowa w Javie
